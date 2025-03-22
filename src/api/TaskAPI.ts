@@ -13,19 +13,3 @@ export async function createTask({projectId, formData} : {projectId: Project['_i
         }
     }    
 }
-
-export async function getProjectTasks(projectId: Project['_id']) {
-    try {
-        const url = `/projects/${projectId}/task`
-        const {data} = await api.get(url)
-
-        console.log(data);
-        
-
-        return data
-    } catch (error) {
-        if(isAxiosError(error) && error.response) {
-            throw new Error(error.response.data.error)
-        }
-    }    
-}

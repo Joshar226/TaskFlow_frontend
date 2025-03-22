@@ -34,9 +34,11 @@ export async function getProjectById(id: Project['_id']) {
         const url = `/projects/${id}`
         const {data} = await api.get(url)
         const response = projectSchema.safeParse(data)
+
         if(response.success) {
             return response.data
         }
+        
     } catch (error) {
         if(isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error)

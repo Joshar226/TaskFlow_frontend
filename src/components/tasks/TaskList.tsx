@@ -1,6 +1,20 @@
+import { TaskProject } from "../../types"
 
-export default function TaskList() {
+type TaskListProps = {
+  tasks: TaskProject[]
+}
+
+export default function TaskList({tasks} : TaskListProps) {
+
+  console.log(tasks);
+  
+
   return (
-    <div>TaskList</div>
+    <div className="task-list">
+      <h2>Tasks</h2>
+      <div className="task-card">
+        <p>hola</p>
+      </div>
+    </div>
   )
 }

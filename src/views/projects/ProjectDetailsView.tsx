@@ -11,7 +11,6 @@ import DeleteProjectForm from "../../components/projects/DeleteProjectForm"
 import ManageCollaborators from "../../components/team/ManageCollaborators"
 import TaskList from "../../components/tasks/TaskList"
 import CreateTask from "../../components/tasks/CreateTask"
-import { getProjectTasks } from "../../api/TaskAPI"
 
 export default function ProjectDetailsView() {
   const navigate = useNavigate()
@@ -56,7 +55,7 @@ export default function ProjectDetailsView() {
           </div>
 
         <main className="task-dashboard">
-          <TaskList />
+          <TaskList tasks={data.tasks}/>
         </main>
       </div>
         <div className="dashboard-project-menu">

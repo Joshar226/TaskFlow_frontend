@@ -76,6 +76,15 @@ export const taskSchema = z.object({
     notes: z.array(noteSchema)
 })
 
+export const taskProjectSchema = taskSchema.pick({
+    _id: true,
+    title: true,
+    description: true,
+    status: true
+})
+
+export type TaskProject = z.infer<typeof taskProjectSchema>
+
 
 
 
@@ -85,7 +94,9 @@ export const projectSchema = z.object({
     _id: z.string(),
     title: z.string(),
     description: z.string(),
-    manager: z.string()
+    manager: z.string(),
+    tasks: z.array(taskProjectSchema),
+    team: z.array(z.string(userSchema.pick({_id: true})))
 })
 
 export const dashboardProjectSchema = z.array(
