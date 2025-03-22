@@ -83,6 +83,7 @@ export const taskProjectSchema = taskSchema.pick({
     status: true
 })
 
+export type Task = z.infer<typeof taskSchema>
 export type TaskProject = z.infer<typeof taskProjectSchema>
 
 

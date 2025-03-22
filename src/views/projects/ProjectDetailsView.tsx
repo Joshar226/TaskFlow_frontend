@@ -36,7 +36,7 @@ export default function ProjectDetailsView() {
 
   const {data, isError} = useQuery({
     queryFn: () => getProjectById(projectId),
-    queryKey: ['project', projectId],
+    queryKey: ['project'],
     retry: 1
   })
 

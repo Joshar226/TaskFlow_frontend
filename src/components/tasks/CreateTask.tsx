@@ -29,7 +29,7 @@ export default function CreateTask() {
         onSuccess: (data) => {
             toast.success(data)
             hideModal()
-            queryClient.invalidateQueries({queryKey: ['tasks']})
+            queryClient.invalidateQueries({queryKey: ['project']})
             reset()
         }
     })
