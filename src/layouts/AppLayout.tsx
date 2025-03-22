@@ -29,9 +29,11 @@ export default function AppLayout() {
       <div className="app-layout">
           <aside className="layout-aside">
               <div className="layout-aside-div">
-                  <h1 className="layout-logo"
-                      >Task <br /> Flow
-                  </h1>
+                  <Link 
+                    to={'/'}
+                    className="layout-logo"
+                  >Task <br /> Flow
+                  </Link>
                   <p className="layout-name">{user.name}</p>
               </div>
 

@@ -1,60 +1,60 @@
 import { useForm } from "react-hook-form"
-import { Project, ProjectForm } from "../../types"
 import ErrorMessage from "../ErrorMessage"
+import { ProjectForm } from "../../types"
+import { useParams } from "react-router-dom"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { updateProject } from "../../api/ProjectAPI"
+import { createTask } from "../../api/TaskAPI"
 import { toast } from "react-toastify"
 import { useStore } from "../../store"
 
-type EditProjectFormProps = {
-    data: Project
-}
 
-export default function EditProjectForm({data} : EditProjectFormProps) {
+export default function CreateTask() {
 
-    const projectId = data._id
-    const queryClient = useQueryClient()
-
+    const params = useParams()
+    const projectId = params.projectId!
     const hideModal = useStore((store) => store.hideModal)
 
+    const queryClient = useQueryClient()
+
     const initialValues : ProjectForm = {
-        title: data.title,
-        description: data.description
+        title: '',
+        description: ''
     }
 
     const {register, handleSubmit, reset, formState: {errors}} = useForm({defaultValues: initialValues})
 
     const {mutate} = useMutation({
-        mutationFn: updateProject,
+        mutationFn: createTask,
         onError: error => toast.error(error.message),
         onSuccess: (data) => {
             toast.success(data)
-            queryClient.invalidateQueries({queryKey: ['project']})
             hideModal()
+            queryClient.invalidateQueries({queryKey: ['tasks']})
             reset()
-
         }
     })
 
-    const handleEditProject = (formData : ProjectForm) => {
+    const handleCreateTask = (formData : ProjectForm) => {
         const data = {
-            formData,
-            projectId
+            projectId,
+            formData
         }
+
         mutate(data)
+        
     }
 
   return (
     <>
-        <h1 className="project-form-title">Edit Project</h1>
+        <h1 className="project-form-title">Create Task</h1>
         <form 
-            onSubmit={handleSubmit(handleEditProject)}
-            className="project-form"
+            onSubmit={handleSubmit(handleCreateTask)}
+            className="project-form" 
         >
             <div className="form-div">
                 <input
                     type="text"
-                    placeholder="Project title"
+                    placeholder="Task title"
                     className="form-input"
                     {...register('title', {
                         required: 'A title is required',
@@ -66,7 +66,7 @@ export default function EditProjectForm({data} : EditProjectFormProps) {
             <div className="form-div">
                 <textarea
                     className="form-textarea"
-                    placeholder="Project description"
+                    placeholder="Task description"
                     {...register('description', {
                         required: 'A description is required'
                     })}
@@ -76,7 +76,7 @@ export default function EditProjectForm({data} : EditProjectFormProps) {
 
             <input
                 type="submit"
-                value='Edit Project'
+                value='Create Task'
                 className="submit-form"
             />
         </form>
