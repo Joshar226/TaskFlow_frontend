@@ -7,6 +7,7 @@ type Store = {
     deleteProject: boolean
     manageCollaborators: boolean
     createTask: boolean
+    taskDetails: boolean
     showModal: () => void
     hideModal: () => void
     showEditProject: () => void
@@ -14,6 +15,7 @@ type Store = {
     showDeleteProject: () => void
     showManageCollaborators: () => void
     showCreateTask: () => void
+    showTaskDetails: () => void
 }
 
 export const useStore = create<Store>((set) => ({
@@ -23,6 +25,7 @@ export const useStore = create<Store>((set) => ({
     deleteProject: false,
     manageCollaborators: false,
     createTask: false,
+    taskDetails: false,
     showModal: () => {
         set(() => ({
             modal: true,
@@ -35,7 +38,8 @@ export const useStore = create<Store>((set) => ({
             addCollaborator: false,
             deleteProject: false,
             manageCollaborators: false,
-            createTask: false
+            createTask: false,
+            taskDetails: false
         }))
     },
     showEditProject: () => {
@@ -65,6 +69,12 @@ export const useStore = create<Store>((set) => ({
     showCreateTask: () => {
         set(() => ({
             createTask: true,
+            modal: true
+        }))
+    },
+    showTaskDetails: () => {
+        set(() => ({
+            taskDetails: true,
             modal: true
         }))
     }

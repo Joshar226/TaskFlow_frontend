@@ -70,7 +70,7 @@ export const taskSchema = z.object({
     updatedAt: z.string(),
     completedBy: z.array(z.object({
         _id: z.string(),
-        user: userSchema,
+        user: userSchema.pick({_id: true, name: true}),
         status: taskStatusSchema
     })),
     notes: z.array(noteSchema)
@@ -100,16 +100,32 @@ export const projectSchema = z.object({
     team: z.array(z.string(userSchema.pick({_id: true})))
 })
 
-export const dashboardProjectSchema = z.array(
+export const dashboardProjectsSchema = z.array(
     projectSchema.pick({
         _id: true,
         title: true,
         description: true,
         manager: true
+    }).extend({
+        tasks: z.array(z.string()),
+        team: z.array(z.string())
     })
 )
 
+export const dashboardProjectSchema = 
+    projectSchema.pick({
+        _id: true,
+        title: true,
+        description: true,
+        manager: true
+    }).extend({
+        tasks: z.array(z.string()),
+        team: z.array(z.string())
+    })
+
+
 export type Project = z.infer<typeof projectSchema>
+export type DashboardProjectType = z.infer<typeof dashboardProjectSchema>
 export type ProjectForm = Pick<Project, 'title' | 'description'>
 
 

@@ -15,8 +15,8 @@ import CreateTask from "../../components/tasks/CreateTask"
 export default function ProjectDetailsView() {
   const navigate = useNavigate()
   
-    const createTask = useStore((store) => store.createTask) 
-    const showCreateTask = useStore((store) => store.showCreateTask) 
+  const createTask = useStore((store) => store.createTask) 
+  const showCreateTask = useStore((store) => store.showCreateTask) 
 
   const editProject = useStore((store) => store.editProject)
   const showEditProject = useStore((store) => store.showEditProject)
@@ -32,6 +32,7 @@ export default function ProjectDetailsView() {
   
   const params = useParams()
   const projectId = params.projectId!
+
   const { data: user } = useAuth()
 
   const {data, isError} = useQuery({
@@ -74,7 +75,7 @@ export default function ProjectDetailsView() {
 
             <button
               onClick={() => showDeleteProject()}
-              className="project-btn project-delete-btn"
+              className="project-btn delete-project-form"
             >Delete Project</button>
           </div>
 

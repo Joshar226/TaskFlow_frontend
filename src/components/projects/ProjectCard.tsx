@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import { Project, User } from "../../types";
+import { DashboardProjectType, User } from "../../types";
 import { isManager } from "../../utils/policies";
 
 type ProjectCardProps = {
-  project: Project
+  project: DashboardProjectType
   userId: User['_id']
 }
 
 export default function ProjectCard({project, userId} : ProjectCardProps) {
-
-  const manager = isManager(project.manager, userId)
   
+  const manager = isManager(project.manager, userId)
 
   return (
     <Link to={`/projects/${project._id}`} className="project">
@@ -22,8 +21,8 @@ export default function ProjectCard({project, userId} : ProjectCardProps) {
         }
 
         <div className="project-information">
-          <p>Tasks: <span className="project-span">3</span></p>
-          <p>Collaborators: <span className="project-span">5</span></p>
+          <p>Tasks: <span className="project-span">{project.tasks.length}</span></p>
+          <p>Collaborators: <span className="project-span">{project.team.length}</span></p>
         </div>
       </div>
 

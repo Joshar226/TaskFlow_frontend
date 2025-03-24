@@ -68,20 +68,9 @@ export default function TaskList({tasks} : TaskListProps) {
         }
       })
 
-
       mutate({projectId, taskId, status})
-
-      
-      
     }
-    
-    
-
   }
-
-  
-  
-  
 
   return (
     <>

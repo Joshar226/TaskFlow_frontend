@@ -16,8 +16,8 @@ export default function DashBoardView() {
   const {data} = useQuery({
     queryKey: ['projects'],
     queryFn: getProjects
-  })
-  
+  })  
+
   if(user && data)
     return (
       <div className={`dashboard ${modal && 'modal'}`} >
