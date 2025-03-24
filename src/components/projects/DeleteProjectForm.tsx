@@ -6,14 +6,12 @@ import { checkPassword } from "../../api/AuthAPI";
 import { toast } from "react-toastify";
 import { deleteProject } from "../../api/ProjectAPI";
 import { useNavigate, useParams } from "react-router-dom";
-import { useStore } from "../../store";
 
 export default function DeleteProjectForm() {
 
     const queryClient = useQueryClient()
     const navigate = useNavigate()
     const {projectId} = useParams()
-    const hideModal = useStore((store) => store.hideModal)
 
     const initialValues : CheckPasswordForm = {
         password: ''
@@ -32,7 +30,6 @@ export default function DeleteProjectForm() {
         onSuccess: (data) => {
             toast.success(data)
             queryClient.invalidateQueries({queryKey: ['projects']})
-            hideModal()
             navigate('/')
             reset()
         }

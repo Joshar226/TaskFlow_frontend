@@ -30,9 +30,9 @@ export async function getProjects() {
     }
 }
 
-export async function getProjectById(id: Project['_id']) {
+export async function getProjectById(projectId: Project['_id']) {
     try {
-        const url = `/projects/${id}`
+        const url = `/projects/${projectId}`
         const {data} = await api.get(url)
         const response = projectSchema.safeParse(data)
 

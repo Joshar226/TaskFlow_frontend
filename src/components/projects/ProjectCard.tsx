@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { DashboardProjectType, User } from "../../types";
 import { isManager } from "../../utils/policies";
+import ProjectMenu from "./ProjectMenu";
+
+
 
 type ProjectCardProps = {
   project: DashboardProjectType
@@ -12,23 +15,30 @@ export default function ProjectCard({project, userId} : ProjectCardProps) {
   const manager = isManager(project.manager, userId)
 
   return (
-    <Link to={`/projects/${project._id}`} className="project">
+    <div className="project">
+     <ProjectMenu projectId={project._id} />
+      <Link to={`/projects/${project._id}`}>
 
-      <div className="project-header">
-        {manager ? 
-          <p className="manager">Manager</p> :
-          <p className="collaborator">Collaborator</p>
-        }
+        <div className="project-header">
+          {manager ? 
+            <p className="manager">Manager</p> :
+            <p className="collaborator">Collaborator</p>
+          }
 
-        <div className="project-information">
-          <p>Tasks: <span className="project-span">{project.tasks.length}</span></p>
-          <p>Collaborators: <span className="project-span">{project.team.length}</span></p>
+          <div className="project-information">
+            
+            <p>Tasks: <span className="project-span">{project.tasks.length}</span></p>
+            <p>Collaborators: <span className="project-span">{project.team.length}</span></p>
+          </div>
         </div>
-      </div>
 
-      <h3 className="project-title">{project.title}</h3>
+        <h3 className="project-title">{project.title}</h3>
 
-      <p className="project-description">{project.description}</p>
-    </Link>
+        <p className="project-description">{project.description}</p>
+
+        
+        
+      </Link>
+    </div>
   )
 }

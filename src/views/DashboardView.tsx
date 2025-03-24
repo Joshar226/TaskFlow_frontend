@@ -2,9 +2,9 @@ import { useAuth } from "../hooks/useAuth";
 import ProjectCard from "../components/projects/ProjectCard";
 import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "../api/ProjectAPI";
-import CreateProjectForm from "../components/projects/CreateProjectForm";
 import { useStore } from "../store";
 import Modal from "../components/Modal";
+import EditProjectData from "../components/projects/EditProjectData";
 
 export default function DashBoardView() {
 
@@ -12,7 +12,7 @@ export default function DashBoardView() {
   const showModal = useStore((store) => store.showModal)
 
   const { data: user } = useAuth()
-
+  
   const {data} = useQuery({
     queryKey: ['projects'],
     queryFn: getProjects
@@ -33,8 +33,7 @@ export default function DashBoardView() {
         <main className="dashboard-projects">
           {data.map( project => <ProjectCard key={project._id} project={project} userId={user._id}/>)}
         </main>
-
-        {modal && <Modal> <CreateProjectForm/> </Modal>}
+        <Modal> <EditProjectData/> </Modal>    
       </div>
     )
 }

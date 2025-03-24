@@ -4,7 +4,7 @@ import ErrorMessage from "../ErrorMessage"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { updateProject } from "../../api/ProjectAPI"
 import { toast } from "react-toastify"
-import { useStore } from "../../store"
+import { useLocation, useNavigate } from "react-router-dom"
 
 type EditProjectFormProps = {
     data: Project
@@ -12,10 +12,11 @@ type EditProjectFormProps = {
 
 export default function EditProjectForm({data} : EditProjectFormProps) {
 
+    const location = useLocation()
+    const navigate = useNavigate()
+
     const projectId = data._id
     const queryClient = useQueryClient()
-
-    const hideModal = useStore((store) => store.hideModal)
 
     const initialValues : ProjectForm = {
         title: data.title,
@@ -29,10 +30,9 @@ export default function EditProjectForm({data} : EditProjectFormProps) {
         onError: error => toast.error(error.message),
         onSuccess: (data) => {
             toast.success(data)
-            queryClient.invalidateQueries({queryKey: ['project']})
-            hideModal()
+            queryClient.invalidateQueries({queryKey: ['projects']})
             reset()
-
+            navigate(location.pathname, {replace: true})
         }
     })
 

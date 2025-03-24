@@ -5,7 +5,7 @@ import { isManager } from "../../utils/policies"
 import { useAuth } from "../../hooks/useAuth"
 import { useStore } from "../../store"
 import Modal from "../../components/Modal"
-import EditProjectForm from "../../components/projects/EditProjectForm"
+// import EditProjectForm from "../../components/projects/EditProjectForm"
 import AddCollaboratorForm from "../../components/team/AddCollaboratorForm"
 import DeleteProjectForm from "../../components/projects/DeleteProjectForm"
 import ManageCollaborators from "../../components/team/ManageCollaborators"
@@ -18,8 +18,7 @@ export default function ProjectDetailsView() {
   const createTask = useStore((store) => store.createTask) 
   const showCreateTask = useStore((store) => store.showCreateTask) 
 
-  const editProject = useStore((store) => store.editProject)
-  const showEditProject = useStore((store) => store.showEditProject)
+
 
   const addCollaborator = useStore((store) => store.addCollaborator)
   const showAddCollaborator = useStore((store) => store.showAddCollaborator)
@@ -68,10 +67,10 @@ export default function ProjectDetailsView() {
               className="project-btn create-task-btn"
             >Create Task</button>
 
-            <button
+            {/* <button
               onClick={() => showEditProject()}
               className="project-btn project-edit-btn"
-            >Edit Project</button>
+            >Edit Project</button> */}
 
             <button
               onClick={() => showDeleteProject()}
@@ -94,7 +93,6 @@ export default function ProjectDetailsView() {
         </div>
 
         {createTask && <Modal> <CreateTask /> </Modal>}
-        {editProject  && <Modal> <EditProjectForm data={data} /> </Modal>}
         {addCollaborator && <Modal> <AddCollaboratorForm /> </Modal>}
         {deleteProject && <Modal> <DeleteProjectForm /> </Modal>}
         {manageCollaborators && <Modal> <ManageCollaborators /> </Modal>}
