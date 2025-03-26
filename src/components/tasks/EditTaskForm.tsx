@@ -1,45 +1,66 @@
 import { useForm } from "react-hook-form"
-import { ProjectForm } from "../../types"
+import { ProjectForm, Task, TaskForm } from "../../types"
 import ErrorMessage from "../ErrorMessage"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createProject } from "../../api/ProjectAPI"
+import { updateTask } from "../../api/TaskAPI"
 import { toast } from "react-toastify"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useStore } from "../../store"
+import { useEffect } from "react"
 
-export default function CreateProjectForm() {
+type EditTaskFormProps = {
+    task: Task
+}
 
-    const navigate = useNavigate()
+export default function EditTaskForm({task} : EditTaskFormProps) {
+
+
     const location = useLocation()
+    const navigate = useNavigate()
+    const params = useParams()
+    const projectId = params.projectId!
     const queryClient = useQueryClient()
+    const manager = useStore((store) => store.manager)
 
-    const initialValues : ProjectForm = {
-        title: '',
-        description: ''
+    useEffect(() => {
+        if(!manager) {
+            navigate('/404')
+        }
+    }, [manager, navigate])
+    
+    const initialValues : TaskForm = {
+        title: task.title,
+        description: task.description
     }
 
-    const {register, handleSubmit, reset, formState: {errors}} = useForm({defaultValues: initialValues})
+    const {register, handleSubmit, formState: {errors}} = useForm({defaultValues: initialValues})
 
     const {mutate} = useMutation({
-        mutationFn: createProject,
-        onError: (error) => {
-            toast.error(error.message)
-        },
+        mutationFn: updateTask,
+        onError: error => toast.error(error.message),
         onSuccess: (data) => {
-            queryClient.invalidateQueries({queryKey: ['projects']})
+            queryClient.invalidateQueries({queryKey: ['project']})
+            queryClient.invalidateQueries({queryKey: ['task']})
             toast.success(data)
-            reset()
             navigate(location.pathname, {replace: true})
         }
     })
 
-    const handleCreateProject = (formData : ProjectForm) => mutate(formData)
+    const handleEditTask = (formData : ProjectForm) => {
+        const data = {
+            projectId,
+            taskId: task._id,
+            formData
+        }
+        mutate(data)
+    }
 
   return (
     <>
-        <h1 className="project-form-title">Create Project</h1>
+        <h1 className="project-form-title">Edit Task</h1>
         <form 
-            onSubmit={handleSubmit(handleCreateProject)}
-            className="project-form" 
+            onSubmit={handleSubmit(handleEditTask)}
+            className="project-form"
         >
             <div className="form-div">
                 <input
@@ -66,7 +87,7 @@ export default function CreateProjectForm() {
 
             <input
                 type="submit"
-                value='Create Project'
+                value='Edit Task'
                 className="submit-form"
             />
         </form>

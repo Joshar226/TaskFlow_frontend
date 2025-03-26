@@ -9,6 +9,7 @@ import RequestNewCodeView from "./views/auth/RequestNewCodeView";
 import AppLayout from "./layouts/AppLayout";
 import DashBoardView from "./views/DashboardView";
 import ProjectDetailsView from "./views/projects/ProjectDetailsView";
+import ErrorView from "./views/auth/ErrorView";
 
 export default function Router() {
   return (
@@ -21,6 +22,7 @@ export default function Router() {
                 <Route path="auth/reset-password" element={<ResetPasswordView />}/>
                 <Route path="auth/new-password" element={<NewPasswordView />}/>
                 <Route path='/auth/request-code' element={<RequestNewCodeView/>} />
+                <Route path='/404' element={<ErrorView/>} />
             </Route>
 
             <Route element={<AppLayout />}>

@@ -16,7 +16,7 @@ export default function ProjectCard({project, userId} : ProjectCardProps) {
 
   return (
     <div className="project">
-     <ProjectMenu projectId={project._id} />
+     {manager && <ProjectMenu projectId={project._id} />}
       <Link to={`/projects/${project._id}`}>
 
         <div className="project-header">
@@ -35,9 +35,6 @@ export default function ProjectCard({project, userId} : ProjectCardProps) {
         <h3 className="project-title">{project.title}</h3>
 
         <p className="project-description">{project.description}</p>
-
-        
-        
       </Link>
     </div>
   )

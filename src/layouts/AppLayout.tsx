@@ -1,55 +1,42 @@
-import { IoMdAdd } from "react-icons/io";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "../api/ProjectAPI";
 import { useAuth } from "../hooks/useAuth";
 import { ToastContainer } from "react-toastify";
-import { useStore } from "../store";
 
 export default function AppLayout() {
+  const navigate = useNavigate()
+  const { data : user, isError} = useAuth()
 
-    const navigate = useNavigate()
-    const showModal = useStore((store) => store.showModal)
+  if(isError) navigate('/auth/login')
 
-    const createProjectBtn = () => {
-      navigate('/')
-      showModal()
-    }
+  const {data} = useQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects
+  })  
 
-    const { data : user, isError} = useAuth()
-
-    if(isError) navigate('/auth/login')
-
-    const {data} = useQuery({
-      queryKey: ['projects'],
-      queryFn: getProjects
-    })  
+  const singOut = () => {
+    localStorage.removeItem('AUTH_TOKEN')
+    navigate('/auth/login')
+  }
+  
   if(user && data)
     return (
       <div className="app-layout">
           <aside className="layout-aside">
-              <div className="layout-aside-div">
-                  <Link 
+              <div className="layout-aside-content">
+                <div className="layout-aside-div">
+                  <Link
                     to={'/'}
                     className="layout-logo"
-                  >Task <br /> Flow
+                    >Task <br /> Flow
                   </Link>
-                  <p className="layout-name">{user.name}</p>
-              </div>
-
-              <div className="layout-projects-div">
-                <div>
-                  <h3>Projects</h3>
-                  <div className="aside-projects">
-                    {data.map( project => 
-                      <Link key={project._id} to={`/projects/${project._id}`} className="aside-project">{project.title}</Link>
-                    )}
+                  <div>
+                    <p className="layout-name">{user.name}</p>
+                    <button className="sing-out-btn" onClick={singOut}>Sing Out</button>
                   </div>
                 </div>
-                <div className="layout-my-projects-div">
-                  <h3>My Projects</h3>
-                  <IoMdAdd className="my-projects-add-icon" onClick={createProjectBtn}/>
-                </div>
+                <Link to={"/?createProject"} className="layout-create-project-btn">Create Project</Link>
               </div>
           </aside>  
             

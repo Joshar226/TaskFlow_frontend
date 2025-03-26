@@ -12,15 +12,6 @@ type ProjectMenuProps = {
 
 export default function ProjectMenu({projectId} : ProjectMenuProps) {
   const navigate = useNavigate()
-  
-  const editProject = () => {
-    navigate(`?viewProject=${projectId}`)
-  }
-
-  const deleteProject = () => {
-    navigate(`?deleteProject=${projectId}`)
-  }
-
   return (
     <div className="text-right">
       <Menu>
@@ -35,7 +26,7 @@ export default function ProjectMenu({projectId} : ProjectMenuProps) {
         >
           <MenuItem>
             <button 
-              onClick={() => editProject()}
+              onClick={() => navigate(`?editProject=${projectId}`)}
               className="group flex w-full items-center gap-3 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10 cursor-pointer">
               <PencilIcon className="size-9 fill-white/30" />
               <p >Edit</p>
@@ -43,7 +34,7 @@ export default function ProjectMenu({projectId} : ProjectMenuProps) {
           </MenuItem>
           <MenuItem>
             <button 
-              onClick={() => deleteProject()}
+              onClick={() => navigate(`?deleteProject=${projectId}`)}
               className="group flex w-full items-center gap-3 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10 cursor-pointer">
               <TrashIcon className="size-9 fill-white/30" />
               <p>Delete</p>

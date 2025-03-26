@@ -48,12 +48,13 @@ export type TeamMember = z.infer<typeof teamMemberSchema>
 export const noteSchema = z.object({
     _id: z.string(),
     content: z.string(),
-    createdBy: userSchema,
+    createdBy: userSchema.pick({_id: true, name: true}),
     task: z.string(),
     createdAt: z.string()
 })
 
 export type Note = z.infer<typeof noteSchema>
+export type NoteForm = Pick<Note, 'content'>
 
 
 //TASKS
@@ -85,6 +86,7 @@ export const taskProjectSchema = taskSchema.pick({
 
 export type Task = z.infer<typeof taskSchema>
 export type TaskProject = z.infer<typeof taskProjectSchema>
+export type TaskForm = Pick<Task, 'title' | 'description'>
 
 
 

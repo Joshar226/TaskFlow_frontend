@@ -1,20 +1,19 @@
 import { useForm } from "react-hook-form"
 import { TeamMember } from "../../types"
-import { useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { removeProjectCollaborator } from "../../api/TeamAPI"
 import { toast } from "react-toastify"
-import { useStore } from "../../store"
 
 type RemoveCollaboratorResultProps = {
   collaborator : TeamMember
 }
 
 export default function RemoveCollaboratorResult({collaborator} : RemoveCollaboratorResultProps) {
-
+  const location = useLocation()
+  const navigate = useNavigate()
   const params = useParams()
   const projectId = params.projectId!
-  const hideModal = useStore((store) => store.hideModal)
   const queryClient = useQueryClient()
 
   const {handleSubmit} = useForm()
@@ -24,8 +23,8 @@ export default function RemoveCollaboratorResult({collaborator} : RemoveCollabor
     onError: error => toast.error(error.message),
     onSuccess: (data) => {
       toast.success(data)
-      hideModal()
       queryClient.invalidateQueries({queryKey: ['collaborators']})
+      navigate(location.pathname, {replace: true})
     }
   })
 

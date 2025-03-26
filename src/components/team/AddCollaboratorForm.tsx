@@ -5,15 +5,25 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { findCollaborator } from "../../api/TeamAPI"
 import { toast } from "react-toastify"
 import SearchCollaboratorResult from "./SearchCollaboratorResult"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { useStore } from "../../store"
 
 
 
 export default function AddCollaboratorForm() {
-
+  const navigate = useNavigate()
   const params = useParams()
   const projectId = params.projectId!
   const queryClient = useQueryClient()
+
+  const manager = useStore((store) => store.manager)
+
+  useEffect(() => {
+    if(!manager) {
+        navigate('/404')
+    }
+  }, [manager, navigate])
 
   const initialValues : ResetPasswordForm = {
     email: ''

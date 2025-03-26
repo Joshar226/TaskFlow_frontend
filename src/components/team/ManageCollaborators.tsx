@@ -1,12 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import RemoveCollaboratorResult from "./RemoveCollaboratorResult";
 import { getProjectCollaborators } from "../../api/TeamAPI";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useStore } from "../../store";
+import { useEffect } from "react";
 
 export default function ManageCollaborators() {
-
+  const navigate = useNavigate()
   const params = useParams()
   const projectId = params.projectId!
+
+    const manager = useStore((store) => store.manager)
+  
+    useEffect(() => {
+      if(!manager) {
+          navigate('/404')
+      }
+    }, [manager, navigate])
 
   const {data, isError} = useQuery({
     queryFn: () => getProjectCollaborators(projectId),

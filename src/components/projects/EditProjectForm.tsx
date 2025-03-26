@@ -5,16 +5,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { updateProject } from "../../api/ProjectAPI"
 import { toast } from "react-toastify"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 type EditProjectFormProps = {
     data: Project
+    canEdit: boolean
 }
 
-export default function EditProjectForm({data} : EditProjectFormProps) {
-
+export default function EditProjectForm({data, canEdit} : EditProjectFormProps) {
     const location = useLocation()
     const navigate = useNavigate()
-
+    
+    useEffect(() => {
+        if (!canEdit) {
+            navigate('/404')
+        }
+    }, [canEdit, navigate]);
+    
     const projectId = data._id
     const queryClient = useQueryClient()
 

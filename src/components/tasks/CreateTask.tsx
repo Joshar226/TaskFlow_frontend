@@ -1,18 +1,19 @@
 import { useForm } from "react-hook-form"
 import ErrorMessage from "../ErrorMessage"
 import { ProjectForm } from "../../types"
-import { useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createTask } from "../../api/TaskAPI"
 import { toast } from "react-toastify"
-import { useStore } from "../../store"
 
 
 export default function CreateTask() {
+    const navigate = useNavigate()
+    const location = useLocation()
+
 
     const params = useParams()
     const projectId = params.projectId!
-    const hideModal = useStore((store) => store.hideModal)
 
     const queryClient = useQueryClient()
 
@@ -28,9 +29,9 @@ export default function CreateTask() {
         onError: error => toast.error(error.message),
         onSuccess: (data) => {
             toast.success(data)
-            hideModal()
             queryClient.invalidateQueries({queryKey: ['project']})
             reset()
+            navigate(location.pathname, {replace: true})
         }
     })
 
@@ -39,11 +40,9 @@ export default function CreateTask() {
             projectId,
             formData
         }
-
         mutate(data)
-        
     }
-
+    
   return (
     <>
         <h1 className="project-form-title">Create Task</h1>

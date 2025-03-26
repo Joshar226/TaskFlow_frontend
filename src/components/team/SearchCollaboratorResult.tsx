@@ -3,26 +3,25 @@ import { User } from "../../types"
 import { useMutation } from "@tanstack/react-query"
 import { addCollaborator } from "../../api/TeamAPI"
 import { toast } from "react-toastify"
-import { useStore } from "../../store"
-import { useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 type SearchCollaboratorResultProps = {
   user: User
 }
 
 export default function SearchCollaboratorResult({user} : SearchCollaboratorResultProps) {
-
+  const location = useLocation()
+  const navigate = useNavigate()
   const params = useParams()
   const projectId = params.projectId!
 
-  const hideModal = useStore((store) => store.hideModal)
   const {handleSubmit} = useForm()
 
   const {mutate} = useMutation({
     mutationFn: addCollaborator,
     onError: error => toast.error(error.message),
     onSuccess: (data) => {
-      hideModal()
+      navigate(location.pathname, {replace: true})
       toast.success(data)
     }
   }) 
