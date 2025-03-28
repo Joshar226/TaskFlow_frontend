@@ -13,8 +13,12 @@ import AddCollaboratorForm from "../../components/team/AddCollaboratorForm"
 import ManageCollaborators from "../../components/team/ManageCollaborators"
 import { useStore } from "../../store"
 import { useEffect } from "react"
+import DashboardProjectBtns from "../../components/projects/DashboardProjectBtns"
 
 export default function ProjectDetailsView() {
+
+  const {availWidth} = window.screen
+
   const navigate = useNavigate()
   const location = useLocation()
   const params = useParams()
@@ -44,6 +48,9 @@ export default function ProjectDetailsView() {
   if(data && user)
   return (
     <div className="dashboard-flex">
+
+      {availWidth < 1920 && <DashboardProjectBtns />}
+
       <div className='dashboard'>
         <div className="project-details-info">
             <h1 className="dashboard-title">{data.title}</h1>
@@ -58,34 +65,8 @@ export default function ProjectDetailsView() {
         </main>
       </div>
 
+      {availWidth >= 1920 && <DashboardProjectBtns />}
       
-        <div className="dashboard-project-menu">
-          <div className="project-menu-div">
-            <p className="project-menu-text">Tasks</p>
-
-            <button
-              onClick={() => navigate('?createTask')}
-              className="project-btn create-task-btn"
-            >Create Task</button>
-          </div>
-
-          {manager && 
-            <div className="project-menu-div">
-              <p className="project-menu-text">Collaborators</p>
-              <button
-                  onClick={() => navigate('?addCollaborator')}
-                  className="project-btn project-collaborator-btn"
-                >Add Collaborator</button>
-
-                <button
-                  onClick={() => navigate('?manageCollaborator')}
-                  className="project-btn project-manage-collaborator-btn"
-                >Manage Collaborators</button>
-            </div>
-          }
-        </div>
-
-
       {location.search.includes('createTask') && <Modal> <CreateTask /> </Modal>}
       {location.search.includes('editTask') && <Modal> <EditTaskData /> </Modal>}
       {location.search.includes('deleteTask') && <Modal> <DeleteTaskForm /> </Modal>}

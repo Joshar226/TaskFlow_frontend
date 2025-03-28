@@ -31,7 +31,7 @@ export default function AppLayout() {
                     className="layout-logo"
                     >Task <br /> Flow
                   </Link>
-                  <div>
+                  <div className="layout-sing-out-div">
                     <p className="layout-name">{user.name}</p>
                     <button className="sing-out-btn" onClick={singOut}>Sing Out</button>
                   </div>
