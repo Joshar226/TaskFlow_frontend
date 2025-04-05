@@ -16,9 +16,6 @@ import { useEffect } from "react"
 import DashboardProjectBtns from "../../components/projects/DashboardProjectBtns"
 
 export default function ProjectDetailsView() {
-
-  const {availWidth} = window.screen
-
   const navigate = useNavigate()
   const location = useLocation()
   const params = useParams()
@@ -44,12 +41,13 @@ export default function ProjectDetailsView() {
   if(isError) navigate('/404')
   if(isLoading) return <p>Loading</p>
 
-
   if(data && user)
   return (
     <div className="dashboard-flex">
 
-      {availWidth < 1920 && <DashboardProjectBtns />}
+      <div className="show-sm-menu">
+       <DashboardProjectBtns/>
+      </div>
 
       <div className='dashboard'>
         <div className="project-details-info">
@@ -65,7 +63,9 @@ export default function ProjectDetailsView() {
         </main>
       </div>
 
-      {availWidth >= 1920 && <DashboardProjectBtns />}
+      <div className="show-lg-menu">
+       <DashboardProjectBtns/>
+      </div>
       
       {location.search.includes('createTask') && <Modal> <CreateTask /> </Modal>}
       {location.search.includes('editTask') && <Modal> <EditTaskData /> </Modal>}

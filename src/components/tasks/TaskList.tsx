@@ -83,8 +83,8 @@ export default function TaskList({tasks} : TaskListProps) {
               <DropTask status={status}/>
               <ul className="tasks-list">
                 {!tasks ? (
-                  <li className="">
-                    The are not tasks
+                  <li>
+                    <p>The are not tasks</p>
                   </li>
                 ) : (
                   tasks.map( (task) => <TaskCard key={task._id} task={task}/>)

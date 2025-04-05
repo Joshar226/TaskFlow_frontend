@@ -265,9 +265,32 @@ Desktop: 1280px */
   }  
 }
 
+.show-sm-menu {
+  display: block;
+}
+@media (min-width: 1920px) {
+  .show-sm-menu {
+    display: none;
+  }
+}
+
+.show-lg-menu {
+  display: none;
+}
+@media (min-width: 1920px) {
+  .show-lg-menu {
+    display: block;
+  }
+}
+
 .dashboard {
   flex: 1;
-  padding: 1rem 3rem;
+  padding: 1rem;
+}
+@media (min-width: 1440px) {
+  .dashboard {
+    padding-left: 3rem;
+  }
 }
 
 .dashboard-header {
@@ -312,7 +335,7 @@ Desktop: 1280px */
   color: #fff;
   font-weight: 700;
   font-size: 1.5rem;
-  padding: 1.5rem 2.5rem;
+  padding: 1.5rem;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -420,13 +443,21 @@ Desktop: 1280px */
   display: flex;
   align-items: center;
   gap: 3rem;
+  justify-content: start;
 }
 
 .dashboard-project-menu {
   display: flex;
   gap: 2rem;
-  padding: 1rem;
+  padding: 2rem .5rem 0.5rem;
   width: 100%;
+  justify-content: start;
+  gap: 2rem;
+}
+@media (min-width: 1024px) {
+  .dashboard-project-menu {
+    padding: 2rem 3rem 0.5rem;
+  }
 }
 @media (min-width: 1920px) {
   .dashboard-project-menu {
@@ -447,7 +478,7 @@ Desktop: 1280px */
   display: flex;
   gap: 1rem;
 }
-@media (min-width: 600px) {
+@media (min-width: 1920px) {
   .project-menu-collaborators {
     flex-direction: column;
   }
@@ -570,11 +601,17 @@ Desktop: 1280px */
 
 /* TASKS */
 .task-dashboard {
-  margin-top: 5rem;
+  margin-top: 1rem;
+}
+@media (min-width: 1024px) {
+  .task-dashboard {
+    margin-top: 5rem;
+  }
 }
 
 .create-task-btn {
   background-color: #6c008d;
+  height: 100%;
 }
 .create-task-btn:hover {
   background-color: #9600c4;
@@ -585,13 +622,35 @@ Desktop: 1280px */
 }
 
 .tasks-content {
-  display: flex;
-  gap: 5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5rem 1rem;
   margin-top: 2rem;
+}
+@media (min-width: 460px) {
+  .tasks-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .tasks-content {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5rem;
+  }
 }
 
 .task-content {
-  width: 28rem;
+  width: 18rem;
+}
+@media (min-width: 1024px) {
+  .task-content {
+    width: 25rem;
+  }
+}
+@media (min-width: 1500px) {
+  .task-content {
+    width: 28rem;
+  }
 }
 
 .task-status-title {
@@ -599,7 +658,7 @@ Desktop: 1280px */
   text-transform: capitalize;
   text-align: center;
   color: #fff;
-  padding: .8rem 5rem;
+  padding: .8rem;
 }
 
 .title-bg-pending {
@@ -637,7 +696,6 @@ Desktop: 1280px */
 
 .task-card-flex {
   display: flex;
-  justify-content: space-between;
   background-color: #000;
   padding: 1rem 2rem;
   border-radius: 1rem;
@@ -652,14 +710,25 @@ Desktop: 1280px */
 
 .task-title-card {
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   text-transform: capitalize;
+}
+@media (min-width: 1440px) {
+  .task-title-card {
+    font-size: 2rem;
+  }
 }
 
 .task-description-card {
   color: #858585;
   text-transform: capitalize;
+  font-size: 1.3rem;
+}
+@media (min-width: 1440px) {
+  .task-title-card {
+    font-size: 2rem;
+  }
 }
 
 .task-three-dots {
