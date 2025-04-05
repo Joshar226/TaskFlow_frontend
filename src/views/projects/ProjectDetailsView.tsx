@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { getProjectById } from "../../api/ProjectAPI"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { isManager } from "../../utils/policies"
@@ -14,13 +14,17 @@ import ManageCollaborators from "../../components/team/ManageCollaborators"
 import { useStore } from "../../store"
 import { useEffect } from "react"
 import DashboardProjectBtns from "../../components/projects/DashboardProjectBtns"
+import LoadingProjectInfo from "../../components/projects/LoadingProjectInfo"
 
 export default function ProjectDetailsView() {
   const navigate = useNavigate()
   const location = useLocation()
   const params = useParams()
   const projectId = params.projectId!
+  const queryClient = useQueryClient()
 
+  queryClient.removeQueries({queryKey: ['task']})
+  queryClient.removeQueries({queryKey: ['collaborators']})
   const manager = useStore((store) => store.manager)
   const setManager = useStore((store) => store.setManager)
 
@@ -39,7 +43,8 @@ export default function ProjectDetailsView() {
   }, [data, user, setManager]);
   
   if(isError) navigate('/404')
-  if(isLoading) return <p>Loading</p>
+
+    if(isLoading) return <LoadingProjectInfo />
 
   if(data && user)
   return (

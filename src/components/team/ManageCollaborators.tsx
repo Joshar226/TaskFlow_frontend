@@ -4,6 +4,8 @@ import { getProjectCollaborators } from "../../api/TeamAPI";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useStore } from "../../store";
 import { useEffect } from "react";
+import LoadingTaskInfo from "../tasks/LoadingTaskInfo";
+
 
 export default function ManageCollaborators() {
   const navigate = useNavigate()
@@ -18,13 +20,15 @@ export default function ManageCollaborators() {
       }
     }, [manager, navigate])
 
-  const {data, isError} = useQuery({
+  const {data, isError, isLoading} = useQuery({
     queryFn: () => getProjectCollaborators(projectId),
     queryKey: ['collaborators'],
     retry: 1
   })
 
   if(isError) return <Navigate to={'/404'}/>
+
+  if(isLoading) return <LoadingTaskInfo />
   
   if(data)
   return (

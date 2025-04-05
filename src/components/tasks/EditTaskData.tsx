@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Navigate, useLocation, useParams } from "react-router-dom"
 import { getTaskById } from "../../api/TaskAPI"
 import EditTaskForm from "./EditTaskForm"
-
+import LoadingTaskInfo from "./LoadingTaskInfo";
 
 
 export default function EditTaskData() {
@@ -13,7 +13,7 @@ export default function EditTaskData() {
   const projectId = params.projectId!
   const taskId = queryParams.get('editTask')!
 
-  const {data, isError} = useQuery({
+  const {data, isError, isLoading} = useQuery({
     queryFn: () => getTaskById({projectId, taskId}),
     queryKey: ['task'],
     enabled: !!taskId,
@@ -22,6 +22,8 @@ export default function EditTaskData() {
 
   if(isError) return <Navigate to={'/404'}/>
     
+  if(isLoading) return <LoadingTaskInfo />
+
   if(data)
     return (
     <><EditTaskForm task={data}/></>

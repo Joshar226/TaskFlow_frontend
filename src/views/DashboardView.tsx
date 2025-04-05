@@ -6,7 +6,8 @@ import Modal from "../components/Modal";
 import { useLocation, useNavigate } from "react-router-dom";
 import CreateProjectForm from "../components/projects/CreateProjectForm";
 import EditProjectData from "../components/projects/EditProjectData";
-import DeleteProjectForm from "../components/projects/DeleteProjectForm";
+import LoadingProjectInfo from "../components/projects/LoadingProjectInfo";
+
 
 export default function DashBoardView() {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ export default function DashBoardView() {
     queryFn: getProjects
   })
 
-  if(isLoading) return <p>Loading</p>
+  if(isLoading) return <LoadingProjectInfo />
 
   if(user && data)
     return (
@@ -39,7 +40,7 @@ export default function DashBoardView() {
         </main>
         {location.search.includes('editProject') && <Modal> <EditProjectData/> </Modal>}    
         {location.search.includes('createProject') && <Modal> <CreateProjectForm/> </Modal>}
-        {location.search.includes('deleteProject') && <Modal> <DeleteProjectForm/> </Modal>}
+        {location.search.includes('deleteProject') && <Modal> <EditProjectData/> </Modal>}
       </div>
     )
 }
