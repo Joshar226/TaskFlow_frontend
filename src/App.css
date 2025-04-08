@@ -225,8 +225,22 @@ Desktop: 1280px */
   font-size: 2rem;
 }
 
+.profile-btn {
+  background-color: #3adaca;
+  font-size: 1.5rem;
+  margin-top: .5rem;
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+.profile-btn:hover {
+  background-color: #21b8a9;
+}
+
+
 .sing-out-btn {
-  background-color: #b80000;
+  color: #b80000;
   font-size: 1.5rem;
   margin-top: .5rem;
   padding: .5rem 1rem;
@@ -235,7 +249,7 @@ Desktop: 1280px */
   font-weight: 700;
 }
 .sing-out-btn:hover {
-  background-color: #a70000;
+  color: #a70000;
 }
 
 .layout-create-project-btn {
@@ -810,6 +824,8 @@ Desktop: 1280px */
   font-weight: 700;
 }
 
-@media screen {
-  
+.profile-content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
 }

@@ -29,6 +29,8 @@ export default function Router() {
               <Route path='/' element={<DashBoardView />} index/>
               <Route path='/projects/:projectId' element={<ProjectDetailsView />} />
             </Route>
+
+            
         </Routes>
     </BrowserRouter>
   )

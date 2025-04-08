@@ -33,6 +33,7 @@ export default function AppLayout() {
                   </Link>
                   <div className="layout-sing-out-div">
                     <p className="layout-name">{user.name}</p>
+                    <Link to={'?profile'} className="profile-btn">Profile</Link>
                     <button className="sing-out-btn" onClick={singOut}>Sing Out</button>
                   </div>
                 </div>

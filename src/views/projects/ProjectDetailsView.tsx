@@ -15,6 +15,7 @@ import { useStore } from "../../store"
 import { useEffect } from "react"
 import DashboardProjectBtns from "../../components/projects/DashboardProjectBtns"
 import LoadingProjectInfo from "../../components/projects/LoadingProjectInfo"
+import ProfileData from "../auth/ProfileData"
 
 export default function ProjectDetailsView() {
   const navigate = useNavigate()
@@ -78,6 +79,7 @@ export default function ProjectDetailsView() {
       {location.search.includes('viewTask') && <Modal> <TaskDetailsData /> </Modal>}
       {location.search.includes('addCollaborator') && <Modal> <AddCollaboratorForm /> </Modal>}
       {location.search.includes('manageCollaborator') && <Modal> <ManageCollaborators /> </Modal>}
+      {location.search.includes('profile') && <Modal> <ProfileData /> </Modal>}
     </div>
   )
 }
