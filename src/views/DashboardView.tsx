@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CreateProjectForm from "../components/projects/CreateProjectForm";
 import EditProjectData from "../components/projects/EditProjectData";
 import LoadingProjectInfo from "../components/projects/LoadingProjectInfo";
+import ProfileData from "./auth/ProfileData";
 
 
 export default function DashBoardView() {
@@ -36,11 +37,12 @@ export default function DashBoardView() {
         </header>
 
         <main className="dashboard-projects">
-          {data.map( project => <ProjectCard key={project._id} project={project} userId={user._id}/>)}
+          {!data.length ? <p className="no-items">No Projects</p> : data.map( project => <ProjectCard key={project._id} project={project} userId={user._id}/>)}
         </main>
         {location.search.includes('editProject') && <Modal> <EditProjectData/> </Modal>}    
         {location.search.includes('createProject') && <Modal> <CreateProjectForm/> </Modal>}
         {location.search.includes('deleteProject') && <Modal> <EditProjectData/> </Modal>}
+        {location.search.includes('profile') && <Modal> <ProfileData /> </Modal>}
       </div>
     )
 }

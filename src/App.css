@@ -226,7 +226,7 @@ Desktop: 1280px */
 }
 
 .profile-btn {
-  background-color: #3adaca;
+  background-color: #8000a7;
   font-size: 1.5rem;
   margin-top: .5rem;
   padding: .5rem 1rem;
@@ -235,7 +235,7 @@ Desktop: 1280px */
   font-weight: 700;
 }
 .profile-btn:hover {
-  background-color: #21b8a9;
+  background-color: #6c008d;
 }
 
 
@@ -399,6 +399,10 @@ Desktop: 1280px */
   }  
 }
 
+.no-items {
+  color: #666666;
+  text-align: center;
+}
 
 .project {
   background-color: #000;
@@ -715,6 +719,7 @@ Desktop: 1280px */
   border-radius: 1rem;
   gap: 1rem;
   align-items: start;
+  cursor: grab;
 }
 
 .task-card {
