@@ -5,6 +5,7 @@ import { formatDate } from "../../utils/utils";
 import DeleteNoteForm from "../notes/DeleteNoteForm";
 import { useAuth } from "../../hooks/useAuth";
 import { isManager } from "../../utils/policies";
+import ChangeStatusForm from "./ChangeStatusForm";
 
 type TaskDetailsProps = {
     task: Task
@@ -28,6 +29,11 @@ export default function TaskDetails({task} : TaskDetailsProps) {
                     <p>{completedByInfo.status}</p>
                 </div>
             ))}
+        </div>
+
+        <div>
+            <h2 className="notes-title">Change Status</h2>
+            <ChangeStatusForm task={task} />
         </div>
 
         <div className="notes-content">

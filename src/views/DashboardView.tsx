@@ -26,7 +26,7 @@ export default function DashBoardView() {
 
   if(user && data)
     return (
-      <div className={`dashboard`} >
+      <div className='dashboard' >
         <header className="dashboard-header">
           <h1 className="dashboard-title">Projects</h1>
 
