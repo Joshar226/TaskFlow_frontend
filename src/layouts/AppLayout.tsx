@@ -19,7 +19,7 @@ export default function AppLayout() {
     localStorage.removeItem('AUTH_TOKEN')
     navigate('/auth/login')
   }
-  
+   
   if(user && data)
     return (
       <div className="app-layout">
