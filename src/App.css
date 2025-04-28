@@ -66,15 +66,17 @@ Desktop: 1280px */
 
 .submit-form {
   color: #fff;
+  cursor: pointer;
   border: none;
   width: 100%;
   padding: 1rem 2rem;
   border-radius: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
+  background-color: #8000a7;
 }
 .submit-form:hover {
-  cursor: pointer;
+  background-color: #6c008d;
 }
 
 
