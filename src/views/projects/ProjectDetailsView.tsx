@@ -58,8 +58,8 @@ export default function ProjectDetailsView() {
         <div className="project-details-info">
             <h1 className="dashboard-title">{data.title}</h1>
             {manager ?
-              <p className="manager">Manager</p> :
-              <p className="collaborator">Collaborator</p>
+              <p className="rol manager">Manager</p> :
+              <p className="rol collaborator">Collaborator</p>
             }
           </div>
 

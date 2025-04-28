@@ -84,7 +84,7 @@ export default function EditProjectForm({data, canEdit} : EditProjectFormProps) 
             <input
                 type="submit"
                 value='Edit Project'
-                className="submit-form"
+                className="submit-form edit-btn-form"
             />
         </form>
     </>

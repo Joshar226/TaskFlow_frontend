@@ -88,7 +88,7 @@ export default function EditTaskForm({task} : EditTaskFormProps) {
             <input
                 type="submit"
                 value='Edit Task'
-                className="submit-form"
+                className="submit-form edit-btn-form"
             />
         </form>
     </>

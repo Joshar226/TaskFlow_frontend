@@ -65,7 +65,6 @@ Desktop: 1280px */
 }
 
 .submit-form {
-  background-color: #003ab7;
   color: #fff;
   border: none;
   width: 100%;
@@ -75,8 +74,16 @@ Desktop: 1280px */
   font-weight: 700;
 }
 .submit-form:hover {
-  background-color: #0033a0;
   cursor: pointer;
+}
+
+
+
+.edit-btn-form {
+  background-color: #d18800;
+}
+.edit-btn-form:hover {
+  background-color: #a56b00;
 }
 
 .delete-project-form {
@@ -243,7 +250,7 @@ Desktop: 1280px */
   color: #b80000;
   font-size: 1.5rem;
   margin-top: .5rem;
-  padding: .5rem 1rem;
+  padding: .5rem 0;
   border-radius: 1rem;
   cursor: pointer;
   font-weight: 700;
@@ -252,18 +259,20 @@ Desktop: 1280px */
   color: #a70000;
 }
 
-.layout-create-project-btn {
+.layout-btn {
   background-color: #8000a7;
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
   border-radius: 1rem;
 }
-.layout-create-project-btn:hover {
+.layout-btn:hover {
   background-color: #6c008d;
 }
 
-
+.profile-btn {
+  font-size: 1.5rem;
+}
 
 
 /* MAIN */
@@ -343,8 +352,6 @@ Desktop: 1280px */
 }
 
 
-
-
 .project-btn {
   color: #fff;
   font-weight: 700;
@@ -356,11 +363,12 @@ Desktop: 1280px */
   border-radius: 1.5rem;
 }
 
-.project-edit-btn {
-  background-color: #e19f11;
+.create-task-btn {
+  background-color: #6c008d;
+  height: 100%;
 }
-.project-edit-btn:hover {
-  background-color: #ce8d00;
+.create-task-btn:hover {
+  background-color: #9600c4;
 }
 
 .project-collaborator-btn{
@@ -418,22 +426,23 @@ Desktop: 1280px */
   gap: 2rem;
 }
 
+.rol {
+  font-weight: 700;
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  border:  solid 2px;
+}
+
 .manager {
   background-color: rgb(211, 0, 211);
   color: rgb(122, 0, 122);
-  font-weight: 700;
-  padding: .5rem 1rem;
-  border-radius: 1rem;
-  border: rgb(122, 0, 122) solid 2px;
+  border-color: #7a007a;
 }
 
 .collaborator {
-  background-color: rgb(165, 107, 0);
-  color: rgb(255, 166, 0);
-  font-weight: 700;
-  padding: .5rem 1rem;
-  border-radius: 1rem;
-  border: rgb(255, 166, 0) solid 2px;
+  background-color: #a56b00;
+  color: #ffa600;
+  border-color: #ffa600;
 }
 
 .project-information {
@@ -625,14 +634,6 @@ Desktop: 1280px */
   .task-dashboard {
     margin-top: 5rem;
   }
-}
-
-.create-task-btn {
-  background-color: #6c008d;
-  height: 100%;
-}
-.create-task-btn:hover {
-  background-color: #9600c4;
 }
 
 .task-title {

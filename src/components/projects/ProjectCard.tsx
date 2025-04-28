@@ -21,8 +21,8 @@ export default function ProjectCard({project, userId} : ProjectCardProps) {
 
         <div className="project-header">
           {manager ? 
-            <p className="manager">Manager</p> :
-            <p className="collaborator">Collaborator</p>
+            <p className="rol manager">Manager</p> :
+            <p className="rol collaborator">Collaborator</p>
           }
 
           <div className="project-information">
